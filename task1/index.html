@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JS Async & Runtime Laboratory</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>JavaScript Runtime & Async Operations</h1>
+      <p>Closures, Event Loop, Microtasks, and Concurrent vs Sequential Execution</p>
+    </header>
+
+    <!-- Task Cards Dashboard -->
+    <section class="section">
+      <h2>1. Task Management System (Closures & Promises)</h2>
+      <div class="controls">
+        <button id="btn-run-all" class="btn primary">Run All Tasks (Concurrent)</button>
+        <button id="btn-reset-all" class="btn secondary">Reset Counters & Status</button>
+      </div>
+      <div id="all-tasks-banner" class="banner hidden"></div>
+      
+      <div class="task-grid">
+        <div class="task-card" id="card-users">
+          <div class="task-header">
+            <h3>Load Users</h3>
+            <span class="badge status-idle" id="status-users">Idle</span>
+          </div>
+          <div class="task-body">
+            <p><strong>Execution Count:</strong> <span id="count-users">0</span></p>
+            <p><strong>Last Duration:</strong> <span id="time-users">0 ms</span></p>
+          </div>
+          <button class="btn task-btn" data-task="users">Run Task</button>
+        </div>
+
+        <div class="task-card" id="card-posts">
+          <div class="task-header">
+            <h3>Load Posts</h3>
+            <span class="badge status-idle" id="status-posts">Idle</span>
+          </div>
+          <div class="task-body">
+            <p><strong>Execution Count:</strong> <span id="count-posts">0</span></p>
+            <p><strong>Last Duration:</strong> <span id="time-posts">0 ms</span></p>
+          </div>
+          <button class="btn task-btn" data-task="posts">Run Task</button>
+        </div>
+
+        <div class="task-card" id="card-comments">
+          <div class="task-header">
+            <h3>Load Comments</h3>
+            <span class="badge status-idle" id="status-comments">Idle</span>
+          </div>
+          <div class="task-body">
+            <p><strong>Execution Count:</strong> <span id="count-comments">0</span></p>
+            <p><strong>Last Duration:</strong> <span id="time-comments">0 ms</span></p>
+          </div>
+          <button class="btn task-btn" data-task="comments">Run Task</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Execution Mode Comparison -->
+    <section class="section">
+      <h2>2. Sequential vs Concurrent Benchmark</h2>
+      <div class="controls">
+        <button id="btn-compare" class="btn accent">Run Performance Benchmark</button>
+      </div>
+      <div id="benchmark-results" class="results-box hidden">
+        <div class="benchmark-metric">
+          <span>Sequential Time (await series):</span>
+          <strong id="time-seq">0 ms</strong>
+        </div>
+        <div class="benchmark-metric">
+          <span>Concurrent Time (Promise.allSettled):</span>
+          <strong id="time-conc">0 ms</strong>
+        </div>
+        <p class="benchmark-explanation" id="benchmark-desc"></p>
+      </div>
+    </section>
+
+    <!-- Event Loop Interactive Inspector -->
+    <section class="section">
+      <h2>3. Event Loop & Microtask Inspector</h2>
+      <div class="controls">
+        <button id="btn-event-loop" class="btn warning">Run Event Loop Demo</button>
+      </div>
+      <div class="event-loop-grid">
+        <div class="log-panel">
+          <h3>Expected Output Sequence</h3>
+          <pre id="expected-output"></pre>
+        </div>
+        <div class="log-panel">
+          <h3>Actual Execution Output</h3>
+          <pre id="actual-output"></pre>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
