@@ -14,7 +14,7 @@ export default function App() {
         <CoffeeCounter />
         <Contacts items={profile.contacts} />
       </main>
-      <footer>Built with React, coffee and {'<3'}</footer>
+      <footer>Built with React and double esspresso</footer>
     </>
   )
 }

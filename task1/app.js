@@ -225,6 +225,7 @@ function runEventLoopDemo() {
   Promise.resolve().then(() => {
     appendActualLog("[4] Microtask: Promise.resolve().then() #1");
   });
+  Promise.
 
   // Async/Await Microtask setup
   async function asyncFn() {
