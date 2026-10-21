@@ -37,6 +37,7 @@ Open the local URL printed by Vite (normally `http://127.0.0.1:5173`). Dependenc
 | `npm run dev` | Start the development server with hot updates |
 | `npm run build` | Create the production website in `dist/` |
 | `npm run preview` | Serve that production build locally |
+| `npm run deploy` | Build and publish to the existing repository's `gh-pages` branch under `midterm_project/` |
 | `npm test` | Run API, validation, search/filter/sort, persistence, and cancellation tests |
 | `npm run test:e2e` | Run browser scenarios against the production build |
 | `node scripts/generate-data.mjs` | Regenerate the deterministic 120-record JSON seed |
@@ -47,7 +48,6 @@ Run `npm run build` before browser tests. The browser test configuration uses an
 
 ```text
 midterm_project/
-├── .github/workflows/deploy.yml    GitHub Pages build/deploy workflow
 ├── public/favicon.svg            Original local icon
 ├── scripts/generate-data.mjs      Repeatable sample-data generator
 ├── src/
@@ -89,24 +89,35 @@ The first non-canceled request fails once. Click **Try again** to show recovery.
 
 ## Publish it yourself
 
-The project is prepared for GitHub Pages. No repository has been created or pushed for you, and no public deployment is claimed.
+This project is configured for the existing **Nurlan0007/react-js_script** repository. Its GitHub Pages source is already the `gh-pages` branch, using the root folder. Keep the midterm source in its current subfolder on `main`.
 
-### Recommended: this folder is the repository root
+Run from this project folder:
 
-1. Create your own GitHub repository, for example `midterm_project`.
-2. Upload/push the **contents of this folder**, so `package.json` and `.github` are at the repository root. Do not upload `node_modules`, `dist`, `.env.local`, or test reports.
-3. Open repository **Settings → Pages → Build and deployment → Source → GitHub Actions**.
-4. The included workflow runs on pushes to `main`. If your branch has a different name, change `branches: [main]` in `.github/workflows/deploy.yml`.
-5. If needed, open **Actions → Deploy StudySpot to GitHub Pages → Run workflow** after enabling Pages.
-6. Open the URL reported by the successful deployment. Check the homepage, a detail-page refresh, adding a space, and saving it.
+```powershell
+cd C:\Users\Nurlan\Desktop\js_practice\midterm_project
+npm install
+npm run deploy
+```
 
-GitHub Pages availability depends on your account/repository visibility. A public repository is the simplest option for a public coursework deployment. Vite uses `base: './'` so assets work under a repository subpath; `HashRouter` keeps detail routes refreshable without server rewrites.
+`predeploy` builds the app automatically. The deploy command then pushes the compiled `dist` files to the **midterm_project/** directory on **gh-pages**. Its `--add` option preserves the existing homepage and other published task files. It does not push your source changes to `main`; commit and push those separately as usual.
 
-### If you keep it inside the existing `js_practice` repository
+You run this command to publish; preparing the command does not itself deploy the website.
 
-GitHub only discovers workflows in the **repository-root** `.github/workflows` directory. A workflow inside `midterm_project/.github` is not automatically run by the parent repository. You must integrate a workflow at the repository root, set its npm working directory to `midterm_project`, use `midterm_project/package-lock.json` as the cache dependency path, and upload `midterm_project/dist`. Review your existing Pages setup first: a repository normally has one Pages deployment, so replacing it could replace another exercise's published site.
+On GitHub, confirm **Settings → Pages → Build and deployment** shows:
 
-A dedicated repository is easier for this submission. Alternatively, deploy the folder through a static hosting provider with build command `npm run build` and output directory `dist`.
+- **Source:** Deploy from a branch
+- **Branch:** gh-pages
+- **Folder:** / (root)
+
+After the terminal prints `Published`, wait for the Pages build/deployment to finish in the repository's **Actions** tab. The midterm application will then be available at:
+
+**https://nurlan0007.github.io/react-js_script/midterm_project/**
+
+The URL is the deployment destination, not a claim that deployment has already completed. Open it after the Pages run succeeds and test search, a detail-page refresh, adding a space, and saving it.
+
+Vite's `base: './'` resolves assets within this subfolder, and `HashRouter` supports refreshing detail pages. No custom Actions workflow is required for this branch-based deployment, so the unused nested workflow has been removed.
+
+The deploy script explicitly targets this repository. Change its `--repo` URL if you later move the project. When publishing other exercises to the same `gh-pages` branch, also use a suitable destination and preserve existing files; a root deployment that deletes old files could remove the midterm site.
 
 ## Submission
 
