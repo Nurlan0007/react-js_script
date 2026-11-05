@@ -50,7 +50,7 @@ export function createQuestApi({ storage = () => globalThis.localStorage, random
       }
       if (data.nextId <= Math.max(0, ...ids)) throw new Error();
       return data;
-    } catch { throw new Error('Saved quests could not be read. Restore your browser data or clear this site’s quest storage to start again.'); }
+    } catch { throw new Error('Saved quests could not be read. Restore your browser data or r this site’s quest storage to start again.'); }
   }
 
   async function request(operation, options = {}, id = 0) {
