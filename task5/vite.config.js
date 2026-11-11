@@ -1,15 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
+  base: '/react-js_script/',
   plugins: [react()],
   server: {
     port: 5173,
     open: true,
-    historyApiFallback: true,
-  },
-  preview: {
-    port: 4173,
   },
 });
